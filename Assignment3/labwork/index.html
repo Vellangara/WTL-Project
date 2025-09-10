@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Dog Photo </title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffecd2 0%, #d09e8e 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: start;
+            min-height: 100vh;
+            padding: 30px 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #5c3c2d;
+        }
+
+        .quote {
+            font-size: 1.1rem;
+            color: #6a4e42;
+            margin-bottom: 30px;
+        }
+
+        button {
+            padding: 14px 28px;
+            font-size: 18px;
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: background-color 0.1s ease;
+        }
+
+        button:hover {
+            background-color: #460404;
+        }
+
+        #dogImage {
+            margin-top: 30px;
+            max-width: 90%;
+            max-height: 500px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            transition: opacity 0.2s ease-in-out;
+            opacity: 0;
+        }
+
+        #dogImage.visible {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <h1>🐶 Random Dog Photo</h1>
+    <p class="quote">“Happiness is a warm puppy.” </p>
+    <button id="btn1">Show Me a Dog!</button>
+    <img id="dogImage" alt="Random Dog Image" />
+
+    <script>
+    const btn = document.getElementById("btn1");
+    const img = document.getElementById("dogImage");
+
+    btn.addEventListener("click", async () => {
+        try {
+            const res = await fetch("https://dog.ceo/api/breeds/image/random");
+            const data = await res.json();
+            img.classList.remove("visible");
+            img.src = data.message;
+            img.onload = () => {
+                img.classList.add("visible");
+            };
+        } catch (err) {
+            alert("Failed to load a dog image. Please try again!");
+            console.error("Fetch error:", err);
+        }
+    });
+    </script>
+</body>
+</html>
+</body>
+</html>
