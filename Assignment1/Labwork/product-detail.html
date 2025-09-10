@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shoe Details</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #f0f8ff, #e6f0ff);
+      min-height: 100vh;
+    }
+    .detail-cover {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .detail-card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 0 16px rgba(0,0,0,0.12);
+      padding: 40px 30px;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+    }
+    .detail-card img {
+      width: 80%;
+      max-width: 320px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.08);
+    }
+    .detail-card h1 {
+      font-size: 2.2rem;
+      color: #003366;
+      margin-bottom: 10px;
+    }
+    .detail-card p {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+    .detail-card .price {
+      color: green;
+      font-weight: bold;
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+    }
+    .btn-buy {
+      margin-top: 10px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="detail-cover">
+    <div class="detail-card">
+      <img id="shoeImg" src="" alt="Shoe Image">
+      <h1 id="shoeName"></h1>
+      <p id="shoeDesc">Premium Nike sneaker for style and performance.</p>
+      <div class="price" id="shoePrice"></div>
+      <div class="scratch-container">
+        <div class="scratch-message" id="scratchMsg">🎉 You got a coupon: SAVE20 🎉</div>
+        <canvas class="scratch-canvas" id="scratchCanvas"></canvas>
+      </div>
+      <a href="#" class="btn-buy">Buy Now</a>
+    </div>
+  </div>
+  <script>
+    // Get query params
+    function getParam(key) {
+      const url = new URL(window.location.href);
+      return url.searchParams.get(key);
+    }
+    // Set shoe details
+    document.getElementById('shoeName').textContent = getParam('name') || 'Nike Shoe';
+    document.getElementById('shoePrice').textContent = getParam('price') ? '₹' + getParam('price') : '₹6,999';
+    document.getElementById('shoeImg').src = getParam('img') || 'blue.png';
+
+    // Scratch effect
+    const canvas = document.getElementById('scratchCanvas');
+    const msg = document.getElementById('scratchMsg');
+    const ctx = canvas.getContext('2d');
+    let isDrawing = false;
+    function resizeCanvas() {
+      canvas.width = msg.offsetWidth;
+      canvas.height = msg.offsetHeight;
+      ctx.fillStyle = '#888';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+    resizeCanvas();
+    canvas.addEventListener('mousedown', () => isDrawing = true);
+    canvas.addEventListener('mouseup', () => isDrawing = false);
+    canvas.addEventListener('mouseleave', () => isDrawing = false);
+    canvas.addEventListener('mousemove', function(e) {
+      if (!isDrawing) return;
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.beginPath();
+      ctx.arc(x, y, 20, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalCompositeOperation = 'source-over';
+    });
+    window.addEventListener('resize', resizeCanvas);
+  </script>
+</body>
+</html>
