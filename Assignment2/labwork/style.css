@@ -1,0 +1,149 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #ecede9, #96e6a1);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Main Container */
+.container {
+  background-color: #eba7a7;
+  padding: 60px 50px; 
+  border-radius: 20px;
+  display: block; 
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px; 
+  text-align: center;
+}
+
+/* Heading */
+h1 {
+  color: #000000;
+  margin-bottom: 30px;
+  font-size: 32px;
+}
+
+/* Input Group */
+.input-group {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+#taskInput {
+  flex: 1;
+  padding: 12px 15px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#taskInput:focus {
+  border-color: #401ea7;
+  box-shadow: 0 0 8px rgba(39, 174, 96, 0.3);
+}
+
+#addBtn {
+  padding: 12px 18px;
+  background-color: #7b53a3;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.2s;
+}
+
+#addBtn:hover {
+  background-color: #b4cbbe;
+  transform: scale(1.05);
+}
+
+/* Task List */
+#taskList {
+  list-style: none;
+  padding: 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.task-item {
+  background: #f9f9f9;
+  margin-bottom: 15px;
+  padding: 15px 20px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 5px solid #27ae60;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.task-item:hover {
+  transform: translateY(5px);
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.15);
+}
+
+.task-item span {
+  font-size: 16px;
+  flex: 1;
+  text-align: left;
+  color: #2c3e50;
+}
+
+.task-item span.completed {
+  text-decoration: line-through;
+  color: #7f8c8d;
+}
+
+/* Button Group */
+.btn-group {
+  display: flex;
+  gap: 10px;
+  margin-left: 10px;
+}
+
+.btn-group button {
+  padding: 6px 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+/* Complete Button */
+.complete-btn {
+  background-color: #2980b9;
+  color: white;
+}
+
+.complete-btn:hover {
+  background-color: #1f6392;
+  transform: scale(1.1);
+}
+
+/* Delete Button */
+.delete-btn {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+  transform: scale(1.1);
+}
